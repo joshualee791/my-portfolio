@@ -16,10 +16,17 @@ const GET_POSTS = gql`
   }
 `;
 
-export default async function Home() {
+async function fetchPosts() {
   const { data } = await client.query({
     query: GET_POSTS,
+    fetchPolicy: "network-only",
   });
+  return data.posts.nodes;
+}
+
+// Add cache and revalidation settings here
+export default async function Home() {
+  const posts = await fetchPosts();
 
   return (
     <>
@@ -30,7 +37,7 @@ export default async function Home() {
             My Portfolio
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.posts.nodes.map((post) => (
+            {posts.map((post) => (
               <div
                 key={post.slug}
                 className="bg-white p-6 rounded-lg shadow-md"
@@ -49,4 +56,13 @@ export default async function Home() {
       </main>
     </>
   );
+}
+
+// Use `fetch` options for revalidation
+export async function fetchData() {
+  const posts = await fetchPosts();
+  return {
+    props: { posts },
+    revalidate: 60, // Regenerate every 60 seconds
+  };
 }
