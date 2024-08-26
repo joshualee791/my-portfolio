@@ -19,7 +19,6 @@ const GET_POSTS = gql`
 export default async function Home() {
   const { data } = await client.query({
     query: GET_POSTS,
-    fetchPolicy: "network-only",
   });
 
   return (
