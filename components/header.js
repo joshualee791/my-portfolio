@@ -1,4 +1,3 @@
-// components/header.js
 "use client";
 
 import { useState } from "react";
@@ -24,9 +23,14 @@ function Header() {
               className="w-16 h-16"
             />
           </Link>
-          <Link href="/" className="text-xl font-medium">
-            joshualeegarza
-          </Link>
+          <div>
+            <Link href="/" className="text-xl font-bold">
+              joshualeegarza
+            </Link>
+            <p className="text-sm font-light text-gray-600">
+              design // development
+            </p>
+          </div>
         </div>
         <button
           onClick={toggleMenu}
