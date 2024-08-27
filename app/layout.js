@@ -13,6 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://joshuag76.sg-host.com" />
+        <link rel="dns-prefetch" href="https://joshuag76.sg-host.com" />
+      </head>
       <body className={inter.className}>
         <ApolloWrapper>{children}</ApolloWrapper>
       </body>
