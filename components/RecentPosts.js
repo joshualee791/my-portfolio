@@ -1,7 +1,8 @@
-"use client"; // This directive ensures the component is treated as a client component
+"use client"; // Ensures the component is treated as a client component
 
 import Head from "next/head";
 import { gql, useQuery } from "@apollo/client";
+import Link from "next/link"; // Import Link for linking to individual posts
 
 const GET_RECENT_POSTS = gql`
   query GetRecentPosts {
@@ -55,7 +56,7 @@ const RecentPosts = () => {
                 />
               </Head>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                {post.title}
+                <Link href={`/${post.slug}`}>{post.title}</Link>
               </h2>
               <div
                 dangerouslySetInnerHTML={{ __html: post.content }}
